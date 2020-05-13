@@ -19,7 +19,7 @@ namespace TurtleGames.Framework.Runtime
         }
 
         public string GetMessage(){
-            return "Hola Diego, buen sdfsdf";
+            return "Hola Diego, la verdad muy buen trabajo";
         }
     }
 }
