@@ -1,0 +1,18 @@
+{
+  "registry": "https://my.registry.com",
+  "scopedRegistries": [{
+    "name": "My internal registry",
+    "url": "https://my.internal.registry.com",
+    "scopes": [
+      "com.company"
+    ]
+  }],
+  "dependencies": {},
+  "lock": {
+    "com.unity.my-git-package": {
+       "hash": "9e72f9d5a6a3dadc38d813d8399e1b0e86781a49",
+       "revision": "v1.2.3"
+    }
+  },
+  "testables": []
+}

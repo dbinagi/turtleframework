@@ -1,0 +1,15 @@
+{
+  "name": "com.turtlegames",
+  "version": "0.0.1",
+  "displayName": "Turtle Framework",
+  "description": "This is a framework created by Turtle Games",
+  "unity": "2020.1",
+  "unityRelease": "0a12",
+  "dependencies": { },
+ "keywords": [],
+  "author": {
+    "name": "ilbini",
+    "email": "diegobinagi@gmail.com",
+    "url": "https://www.unity3d.com"
+  }
+}
