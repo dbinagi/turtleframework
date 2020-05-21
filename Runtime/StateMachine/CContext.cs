@@ -21,6 +21,12 @@
 	        if(CurrentState != null)
 	            CurrentState.OnUpdate(this);
 	    }
+
+	    public void FixedUpdate()
+	    {
+	        if(CurrentState != null)
+	            CurrentState.OnFixedUpdate(this);
+	    }
 	}
 
 }

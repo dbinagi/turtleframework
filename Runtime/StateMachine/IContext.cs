@@ -4,5 +4,6 @@
 	{
 	    void SetState(IState state);
 	    void Update();
+	    void FixedUpdate();
 	}
 }

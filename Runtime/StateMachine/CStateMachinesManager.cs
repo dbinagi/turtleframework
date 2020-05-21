@@ -13,6 +13,13 @@ namespace TurtleGames.Framework.Runtime.StateMachine
         private void FixedUpdate()
         {
             foreach (IContext context in Contexts.ToArray()) {
+                context.FixedUpdate();
+            }
+        }
+
+        private void Update()
+        {
+            foreach (IContext context in Contexts.ToArray()) {
                 context.Update();
             }
         }

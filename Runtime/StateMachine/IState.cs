@@ -5,5 +5,6 @@
 	    void OnEnter(CContext context);
 	    void OnExit(CContext context);
 	    void OnUpdate(CContext context);
+	    void OnFixedUpdate(CContext context);
 	}
 }
