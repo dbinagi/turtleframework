@@ -24,5 +24,11 @@ namespace TurtleGames.Framework.Runtime.Pool
             return pool;
         }
 
+        public static void DeletePool(PooledMonoBehaviour prefab)
+        {
+            if (pools.ContainsKey(prefab))
+                pools.Remove(prefab);
+        }
+
     }
 }

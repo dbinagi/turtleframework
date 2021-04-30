@@ -42,7 +42,6 @@ namespace TurtleGames.Framework.Runtime.Pool
             var pooledObject = Get<T>();
             pooledObject.transform.position = position;
             pooledObject.transform.rotation = rotation;
-            Debug.Log("Trae");
             return pooledObject;
         }
 

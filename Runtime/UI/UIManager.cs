@@ -71,9 +71,9 @@ namespace TurtleGames.Framework.Runtime.UI
             foreach (var element in Canvas.GetComponentsInChildren<Transform>(true))
             {
                 if (elements.ContainsKey(element.name))
-                    throw new Exception("Another element is already called: " + element.name);
-
-                elements.Add(element.name, element.gameObject);
+                    Debug.LogWarning("Another element is already called: " + element.name);
+                else              
+                    elements.Add(element.name, element.gameObject);
             }
         }
 
