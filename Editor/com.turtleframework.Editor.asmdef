@@ -1,0 +1,20 @@
+{
+    "name": "com.turtleframework.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:dd120e2d52e5b974495f9953bbd3703f"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [
+        ""
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
