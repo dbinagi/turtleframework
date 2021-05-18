@@ -15,16 +15,19 @@ namespace TurtleGames.Framework.Runtime.UI
 
         private Dictionary<string, GameObject> elements = new Dictionary<string, GameObject>();
 
+        private Dictionary<string, TextMeshProUGUI> elementsTextMeshPro = new Dictionary<string, TextMeshProUGUI>();
+
         #region "Public functions"
 
-        public void SetText(string name, object value)
+        public void SetText(string name, object value, bool alsoActivate = false)
         {
-            var element = FindInCanvas(name);
+            //var element = FindInCanvas(name);
+            var textMeshPro = elementsTextMeshPro[name];
 
-            var textMeshPro = element.GetComponent<TextMeshProUGUI>();
             if (textMeshPro == null)
             {
                 // If not TextMeshPro Try Text
+                var element = FindInCanvas(name);
                 var text = element.GetComponent<Text>();
                 if (text == null)
                     throw new Exception("Component has no text or doesn't exist by the name: " + name);
@@ -35,16 +38,23 @@ namespace TurtleGames.Framework.Runtime.UI
             {
                 textMeshPro.SetText(value.ToString());
             }
+
+            if (alsoActivate)
+            {
+                textMeshPro.gameObject.SetActive(true);
+            }
         }
 
         public GameObject FindInCanvas(string name)
         {
-            foreach (var element in elements)
+            try
             {
-                if (element.Key == name)
-                    return element.Value;
+                return elements[name];
             }
-            throw new Exception("Could not find element: " + name);
+            catch (KeyNotFoundException)
+            {
+                throw new Exception("Could not find element: " + name);
+            }
         }
 
         public void Hide(string name)
@@ -72,8 +82,18 @@ namespace TurtleGames.Framework.Runtime.UI
             {
                 if (elements.ContainsKey(element.name))
                     Debug.LogWarning("Another element is already called: " + element.name);
-                else              
+                else
+                {
                     elements.Add(element.name, element.gameObject);
+
+                    // Add to another dictionary to optimize
+                    var textMeshPro = element.GetComponent<TextMeshProUGUI>();
+                    if (textMeshPro != null)
+                    {
+                        elementsTextMeshPro.Add(element.name, textMeshPro);
+                    }
+                }       
+                    
             }
         }
 
