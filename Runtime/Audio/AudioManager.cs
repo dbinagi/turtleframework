@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using TurtleGames.Framework.Runtime.Core;
 
@@ -11,6 +9,8 @@ namespace TurtleGames.Framework.Runtime.Audio
 
     	[SerializeField]
     	public SOAudioConfig config;
+
+        bool toggleMute;
 
         #region "Public Functions"
 
@@ -33,6 +33,24 @@ namespace TurtleGames.Framework.Runtime.Audio
         {
             Sound param = config.GetSoundByName(name);
             param.source.mute = !param.source.mute;
+        }
+
+        public void ToggleMuteAll()
+        {
+            toggleMute = !toggleMute;
+
+            if (toggleMute)
+                MuteAll();
+            else
+                UnmuteAll();
+        }
+
+        public void MuteAll(){
+            AudioListener.volume = 0f;
+        }
+
+        public void UnmuteAll(){
+            AudioListener.volume = 1f;
         }
 
         public void FadeIn(string name, float duration = float.NegativeInfinity, float volume = float.NegativeInfinity)

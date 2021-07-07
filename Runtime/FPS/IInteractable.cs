@@ -3,17 +3,19 @@
     public interface IInteractable
     {
 
-        public bool IsActive();
+        bool IsActive();
 
-        public void OnSight();
+        void OnSight();
 
-        public void OutOfSight();
+        void OutOfSight();
 
-        public void Interact();
+        void Interact();
 
-        public void Activate();
+        void Activate();
 
-        public void Deactivate();
+        void Deactivate();
+
+        void DeInteract();
 
     }
 }

@@ -6,7 +6,7 @@ namespace TurtleGames.Framework.Runtime.Camera
     public class FPSMouseLook : MonoBehaviour
     {
         [SerializeField]
-        private CursorLockMode lockMode;
+        private CursorLockMode startLockMode;
 
         [SerializeField]
         private float mouseSensitivity;
@@ -31,13 +31,13 @@ namespace TurtleGames.Framework.Runtime.Camera
         private float lookAtCeilingRotationLimit;
 
         public bool BlockMovement { get => blockMovement; set => blockMovement = value; }
-        public CursorLockMode LockMode { get => lockMode; set => lockMode = value; }
+        public CursorLockMode StartLockMode { get => startLockMode; set => startLockMode = value; }
 
         #region Unity Functions
 
         void Start()
         {
-            Cursor.lockState = LockMode;
+            Cursor.lockState = StartLockMode;
         }
 
         void Update()
@@ -47,6 +47,26 @@ namespace TurtleGames.Framework.Runtime.Camera
 
             RotateY();
             RotateX();
+        }
+
+        #endregion
+
+        #region Public Functions
+
+        public void FreeMoveMouse()
+        {
+            BlockMovement = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+
+        public void LockMouse()
+        {
+            BlockMovement = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         #endregion

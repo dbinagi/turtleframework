@@ -5,7 +5,9 @@
   "description": "This is a framework created by Turtle Games",
   "unity": "2020.1",
   "unityRelease": "0a12",
-  "dependencies": { },
+  "dependencies": {
+    "com.unity.addressables": "1.16.19"
+  },
  "keywords": [],
   "author": {
     "name": "ilbini",

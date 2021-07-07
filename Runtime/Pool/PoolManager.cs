@@ -9,19 +9,30 @@ namespace TurtleGames.Framework.Runtime.Pool
     {
 
         // Dictionary that stores all the available pools
-        private static Dictionary<PooledMonoBehaviour, Pool> pools = new Dictionary<PooledMonoBehaviour, Pool>();
+        private static Dictionary<PooledMonoBehaviour, IPool> pools = new Dictionary<PooledMonoBehaviour, IPool>();
 
-        public static Pool GetPool(PooledMonoBehaviour prefab)
+        public static IPool GetPool(PooledMonoBehaviour prefab)
         {
             if (pools.ContainsKey(prefab))
                 return pools[prefab];
 
-            var pool = new GameObject("Pool-" + prefab.name).AddComponent<Pool>();
-            pool.prefab = prefab;
+            if (prefab.isAddressable)
+                return AddComponent<AddressablePool>(prefab);
+            else
+            {
+                return AddComponent<Pool>(prefab);
+            }
+        }
 
-            pools.Add(prefab, pool);
+        private static IPool AddComponent<T>(PooledMonoBehaviour prefab) where T : Component
+        {
+            var pool = new GameObject("Pool-" + prefab.name).AddComponent<T>();
+            
+            IPool poolInterface = pool.GetComponent<IPool>();
+            poolInterface.SetPrefab(prefab);
+            pools.Add(prefab, poolInterface);
 
-            return pool;
+            return poolInterface;
         }
 
         public static void DeletePool(PooledMonoBehaviour prefab)

@@ -19,6 +19,11 @@ namespace TurtleGames.Framework.Runtime.UI
 
         #region "Public functions"
 
+        public TextMeshProUGUI GetText(string name)
+        {
+            return elementsTextMeshPro[name];
+        }
+
         public void SetText(string name, object value, bool alsoActivate = false)
         {
             //var element = FindInCanvas(name);
@@ -80,8 +85,10 @@ namespace TurtleGames.Framework.Runtime.UI
 
             foreach (var element in Canvas.GetComponentsInChildren<Transform>(true))
             {
-                if (elements.ContainsKey(element.name))
-                    Debug.LogWarning("Another element is already called: " + element.name);
+                if (elements.ContainsKey(element.name)) {
+
+                    //Debug.LogWarning("Another element is already called: " + element.name);
+                }
                 else
                 {
                     elements.Add(element.name, element.gameObject);

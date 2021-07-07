@@ -9,17 +9,18 @@ namespace TurtleGames.Framework.Runtime.Pool
     public class PooledMonoBehaviour : MonoBehaviour
     {
 
+        public bool isAddressable;
+
         public int poolSize;
 
         public event Action<PooledMonoBehaviour> OnReturnToPool;
         public UnityEvent OnSetActive = new UnityEvent();
 
+        public IPool Pool { get { return PoolManager.GetPool(this); } }
+
         #region "Unity Functions"
 
-        private void OnDisable()
-        {
-            OnReturnToPool?.Invoke(this);
-        }
+        private void OnDisable() => OnReturnToPool?.Invoke(this);
 
         #endregion
 
@@ -53,7 +54,6 @@ namespace TurtleGames.Framework.Runtime.Pool
         #endregion
 
         #region "Private Functions"
-
 
         private IEnumerator ReturnToPoolAfterSeconds(float delay)
         {

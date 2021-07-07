@@ -5,13 +5,23 @@ using UnityEngine;
 
 namespace TurtleGames.Framework.Runtime.Pool
 {
-    public class Pool : MonoBehaviour
+    public class Pool : MonoBehaviour, IPool
     {
+
         // Prefab this Pool is spawning
         public PooledMonoBehaviour prefab;
 
         // Queue for all instanced GameObjects
         private Queue<PooledMonoBehaviour> objects = new Queue<PooledMonoBehaviour>();
+
+        #region "Unity Functions"
+
+        void OnDestroy()
+        {
+            PoolManager.DeletePool(prefab);
+        }
+
+        #endregion
 
         #region "Public Functions"
 
@@ -19,17 +29,13 @@ namespace TurtleGames.Framework.Runtime.Pool
         {
             // If no elements in queue
             if (objects.Count == 0)
-                GrowPool();
+                Grow();
 
             var pooledObject = objects.Dequeue();
             return pooledObject as T;
         }
 
-        #endregion
-
-        #region "Private Functions"
-
-        private void GrowPool()
+        public void Grow()
         {
             for (int i = 0; i < prefab.poolSize; i++)
             {
@@ -41,7 +47,26 @@ namespace TurtleGames.Framework.Runtime.Pool
             }
         }
 
-        private void AddObjectToAvailableQueue(PooledMonoBehaviour pooledObject)
+        public void PrepareData()
+        {
+            // Nothing
+        }
+
+        public Transform GetTransform()
+        {
+            return this.transform;
+        }
+
+        public void SetPrefab(PooledMonoBehaviour prefab)
+        {
+            this.prefab = prefab;
+        }
+
+        #endregion
+
+        #region "Private Functions"
+
+        void AddObjectToAvailableQueue(PooledMonoBehaviour pooledObject)
         {
             pooledObject.transform.SetParent(this.transform);
             objects.Enqueue(pooledObject);

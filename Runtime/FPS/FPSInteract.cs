@@ -71,6 +71,15 @@ namespace TurtleGames.Framework.Runtime.FPS
 
         #endregion
 
+        #region Public Functions
+
+        public IInteractable GetCurrentInteractable()
+        {
+            return currentInteractable;
+        }
+
+        #endregion
+
         #region Private Functions
 
         protected override void OnAwake()
@@ -89,13 +98,15 @@ namespace TurtleGames.Framework.Runtime.FPS
 
         void ObjectOnSight(IInteractable obj)
         {
-            if (obj != CurrentInteractable)
+            if (obj != currentInteractable)
             {
+                OnObjectInSight?.Invoke(obj);
                 CurrentInteractable = obj;
                 CurrentInteractable.OnSight();
-                OnObjectInSight?.Invoke(obj);
             }
+            
         }
+        
 
         void ObjectOutOfSight()
         {
