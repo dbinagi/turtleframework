@@ -14,7 +14,7 @@ namespace TurtleGames.Framework.Runtime.Pool
         public int poolSize;
 
         public event Action<PooledMonoBehaviour> OnReturnToPool;
-        public UnityEvent OnSetActive = new UnityEvent();
+        public UnityEvent<PooledMonoBehaviour> OnSetActive = new UnityEvent();
 
         public IPool Pool { get { return PoolManager.GetPool(this); } }
 
@@ -33,7 +33,7 @@ namespace TurtleGames.Framework.Runtime.Pool
             if (enable)
             {
                 pooledObject.gameObject.SetActive(true);
-                OnSetActive.Invoke();
+                OnSetActive.Invoke(pooledObject);
             }
             return pooledObject;
         }
