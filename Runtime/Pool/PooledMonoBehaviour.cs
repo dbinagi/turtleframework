@@ -14,7 +14,7 @@ namespace TurtleGames.Framework.Runtime.Pool
         public int poolSize;
 
         public event Action<PooledMonoBehaviour> OnReturnToPool;
-        public UnityEvent<PooledMonoBehaviour> OnSetActive = new UnityEvent();
+        public UnityEvent<PooledMonoBehaviour> OnSetActive = new UnityEvent<PooledMonoBehaviour>();
 
         public IPool Pool { get { return PoolManager.GetPool(this); } }
 
