@@ -12,5 +12,10 @@ namespace TurtleGames.Framework.Runtime.Utility
             return value;
         }
         
+        public static string SanitizeObjectName(string name){
+            // Removes clone word
+            return name.Substring(0, name.ToLower().IndexOf("(clone)"));
+        }
+
     }
 }
