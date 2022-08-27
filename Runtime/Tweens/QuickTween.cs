@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace TurtleGames.Framework.Runtime.Tweens
 {
-
-
     public class QuickTween : MonoBehaviour
     {
 
@@ -37,7 +35,7 @@ namespace TurtleGames.Framework.Runtime.Tweens
         {
             transform.position = originalPos;
             LeanTween.cancel(tweenId);
-            var tween = LeanTween.moveLocal(this.gameObject, to + originalPos, time).setLoopPingPong().setEaseInOutSine();
+            var tween = LeanTween.move(this.gameObject, to + originalPos, time).setLoopPingPong().setEaseInOutSine();
             tweenId = tween.uniqueId;
         }
     }
