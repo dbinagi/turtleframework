@@ -6,7 +6,8 @@
   "unity": "2020.1",
   "unityRelease": "0a12",
   "dependencies": {
-    "com.unity.addressables": "1.16.19"
+    "com.unity.addressables": "1.16.19",
+    "com.unity.cinemachine": "2.8.9"
   },
  "keywords": [],
   "author": {
