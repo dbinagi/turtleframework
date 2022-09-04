@@ -29,6 +29,12 @@ namespace TurtleGames.Framework.Runtime.Audio
             audioSource.PlayOneShot(sound.clips[0], audioSource.volume);
         }
 
+        public void Stop(string name)
+        {
+            Sound param = config.GetSoundByName(name);
+            param.source.Stop();
+        }
+
         public void ToggleMute(string name)
         {
             Sound param = config.GetSoundByName(name);
