@@ -74,6 +74,31 @@ namespace TurtleGames.Framework.Runtime.UI
             element.SetActive(true);
         }
 
+        public void FadeOutGroup(string element, float duration, Action callback = null)
+        {
+            GameObject elementObj = UIManager.Instance.FindInCanvas(element);
+            elementObj.SetActive(true);
+
+            CanvasGroup group = elementObj.GetComponent<CanvasGroup>();
+            if (group == null)
+                throw new Exception("No CanvasGroup found for: " + element);
+
+            FadeGroup(group, 1, 0, duration, callback);
+        }
+
+        public void FadeInGroup(string element, float duration, Action callback = null)
+        {
+
+            GameObject elementObj = UIManager.Instance.FindInCanvas(element);
+            elementObj.SetActive(true);
+
+            CanvasGroup group = elementObj.GetComponent<CanvasGroup>();
+            if (group == null)
+                throw new Exception("No CanvasGroup found for: " + element);
+
+            FadeGroup(group, 0, 1, duration, callback);
+        }
+
         #endregion
 
         #region "Private Functions"
@@ -85,7 +110,8 @@ namespace TurtleGames.Framework.Runtime.UI
 
             foreach (var element in Canvas.GetComponentsInChildren<Transform>(true))
             {
-                if (elements.ContainsKey(element.name)) {
+                if (elements.ContainsKey(element.name))
+                {
 
                     //Debug.LogWarning("Another element is already called: " + element.name);
                 }
@@ -99,10 +125,22 @@ namespace TurtleGames.Framework.Runtime.UI
                     {
                         elementsTextMeshPro.Add(element.name, textMeshPro);
                     }
-                }       
-                    
+                }
+
             }
         }
+
+        void FadeGroup(CanvasGroup group, float from, float to, float duration, Action callback = null)
+        {
+            group.alpha = from;
+            LeanTween.alphaCanvas(group, to, duration).setOnComplete(() =>
+            {
+                group.gameObject.SetActive(group.alpha == 1);
+                if (callback != null)
+                    callback();
+            });
+        }
+
 
         #endregion
 
